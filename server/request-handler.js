@@ -29,8 +29,18 @@ var requestHandler = function(request, response) {
   // console.logs in your code.
   console.log("Serving request type " + request.method + " for url " + request.url);
 
+  var results = [];
+
+  var statusCode;
+  if(request.method === 'POST'){
+    statusCode = 201;
+    request.addListener('data', function(message) {
+      results.push(JSON.parse(message));
+    });
+  } else {
+    statusCode = 200;
+  }
   // The outgoing status.
-  var statusCode = 200;
 
   // See the note below about CORS headers.
   var headers = defaultCorsHeaders;
@@ -52,7 +62,9 @@ var requestHandler = function(request, response) {
   //
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
-  response.end("Hello, World!");
+  response.end(JSON.stringify({
+    results: results
+  }));
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
