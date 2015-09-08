@@ -12,6 +12,8 @@ this file and include it in basic-server.js so that it actually works.
 
 **************************************************************/
 var results = [];
+var fs = require('fs');
+
 var requestHandler = function(request, response) {
   // Request and Response come from node's http module.
   //
@@ -27,10 +29,20 @@ var requestHandler = function(request, response) {
   // Adding more logging to your server can be an easy way to get passive
   // debugging help, but you should always be careful about leaving stray
   // console.logs in your code.
+  var index = fs.readFileSync('../client/index.html');
+  var headers = defaultCorsHeaders;
+  headers['Content-Type'] = "application/JSON";
+  var statusCode = 200;
+  if (request.url === '/') {
+    headers['Content-Type'] = "text/html";
+    response.writeHead(statusCode, headers);
+    response.end(index);
+  }
+
   console.log("Serving request type " + request.method + " for url " + request.url);
 
 
-  var statusCode = 200;
+
   if (request.url.indexOf('classes') === -1) {
     statusCode = 404;
   }
@@ -39,18 +51,18 @@ var requestHandler = function(request, response) {
     request.addListener('data', function(message) {
       results.push(JSON.parse(message));
     });
-  }
+  } 
 
   // The outgoing status.
 
   // See the note below about CORS headers.
-  var headers = defaultCorsHeaders;
+  // var headers = defaultCorsHeaders;
 
   // Tell the client we are sending them plain text.
   //
   // You will need to change this if you are sending something
   // other than plain text, like JSON or HTML.
-  headers['Content-Type'] = "application/JSON";
+  // headers['Content-Type'] = "application/JSON";
 
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
