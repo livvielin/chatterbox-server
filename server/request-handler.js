@@ -38,6 +38,42 @@ var requestHandler = function(request, response) {
     response.writeHead(statusCode, headers);
     response.end(index);
   }
+  if(request.method === "GET" && request.url === "/styles/styles.css"){
+    index = fs.readFileSync('../client/styles/styles.css');
+    headers['Content-Type'] = "text/css";
+    response.writeHead(statusCode, headers);
+    response.end(index);
+  }
+  if(request.method === "GET" && request.url === "/bower_components/jquery/dist/jquery.js"){
+    index = fs.readFileSync('../client//bower_components/jquery/dist/jquery.js');
+    headers['Content-Type'] = "text/html";
+    response.writeHead(statusCode, headers);
+    response.end(index);
+  }
+  if(request.method === "GET" && request.url === "/bower_components/underscore/underscore.js"){
+    index = fs.readFileSync('../client/bower_components/underscore/underscore.js');
+    headers['Content-Type'] = "text/html";
+    response.writeHead(statusCode, headers);
+    response.end(index);
+  }
+  if(request.method === "GET" && request.url === "/env/config.js"){
+    index = fs.readFileSync('../client/env/config.js');
+    headers['Content-Type'] = "text/html";
+    response.writeHead(statusCode, headers);
+    response.end(index);
+  }
+  if(request.method === "GET" && request.url === "/scripts/app.js"){
+    index = fs.readFileSync('../client/scripts/app.js');
+    headers['Content-Type'] = "text/html";
+    response.writeHead(statusCode, headers);
+    response.end(index);
+  }
+  if(request.method === "GET" && request.url === "/images/whitebrick.jpg"){
+    index = fs.readFileSync('../client/images/whitebrick.jpg');
+    headers['Content-Type'] = "text/html";
+    response.writeHead(statusCode, headers);
+    response.end(index);
+  }
 
   console.log("Serving request type " + request.method + " for url " + request.url);
 
