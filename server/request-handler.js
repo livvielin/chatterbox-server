@@ -11,7 +11,7 @@ this file and include it in basic-server.js so that it actually works.
 *Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
 
 **************************************************************/
-
+var results = [];
 var requestHandler = function(request, response) {
   // Request and Response come from node's http module.
   //
@@ -29,17 +29,18 @@ var requestHandler = function(request, response) {
   // console.logs in your code.
   console.log("Serving request type " + request.method + " for url " + request.url);
 
-  var results = [];
 
-  var statusCode;
-  if(request.method === 'POST'){
+  var statusCode = 200;
+  if (request.url.indexOf('classes') === -1) {
+    statusCode = 404;
+  }
+  else if(request.method === 'POST'){
     statusCode = 201;
     request.addListener('data', function(message) {
       results.push(JSON.parse(message));
     });
-  } else {
-    statusCode = 200;
   }
+
   // The outgoing status.
 
   // See the note below about CORS headers.
@@ -49,12 +50,12 @@ var requestHandler = function(request, response) {
   //
   // You will need to change this if you are sending something
   // other than plain text, like JSON or HTML.
-  headers['Content-Type'] = "text/plain";
+  headers['Content-Type'] = "application/JSON";
 
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
   response.writeHead(statusCode, headers);
-
+  console.log(response.statusCode);
   // Make sure to always call response.end() - Node may not send
   // anything back to the client until you do. The string you pass to
   // response.end() will be the body of the response - i.e. what shows
