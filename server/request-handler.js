@@ -43,5 +43,3 @@ var collectData = function(request, callback) {
     callback(JSON.parse(data));
   });
 };
-
-exports.requestHandler = requestHandler;

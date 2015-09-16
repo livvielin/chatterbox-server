@@ -102,7 +102,7 @@ $(document).on('click', '.submit-room', function() {
   $('.add-room').val('');
   $('#room').append('<option value=' + room + '>' + room + '</option>');
   rooms.push(room);
-})
+});
 
 $(document).on('click', '.add-friend', function() {
   friends.push(escapeHTML($(this).text()));
