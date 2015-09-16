@@ -24,12 +24,7 @@ var display = function(user, message) {
 
 var fetch = function() {
   $.ajax({
-    // This is the url you should use to communicate with the parse API server.
-<<<<<<< HEAD
     url: 'http://127.0.0.1:3000',
-=======
-    url: 'http://127.0.0.1:3000/classes/messages',
->>>>>>> c263d31c359f566c36bf543719f378e8f2a20d5d
     type: 'GET',
     // data: JSON.stringify(message),
     dataType: 'JSON',
@@ -37,11 +32,7 @@ var fetch = function() {
     success: function (data) {
       $('#chats').empty();
       // console.log(data);
-<<<<<<< HEAD
       for (var i = 0; i < data.results.length; i++) {
-=======
-      for (var i = 0; i < 20; i++) {
->>>>>>> c263d31c359f566c36bf543719f378e8f2a20d5d
         // populate room dropdown with room names of all loaded messages
         var room = escapeHTML(data.results[i].roomname);
         if (rooms.indexOf(room) === -1) {
@@ -67,12 +58,7 @@ var fetch = function() {
 
 var send = function(message) {
   $.ajax({
-    // This is the url you should use to communicate with the parse API server.
-<<<<<<< HEAD
     url: 'http://127.0.0.1:3000',
-=======
-    url: 'http://127.0.0.1:3000/classes/messages',
->>>>>>> c263d31c359f566c36bf543719f378e8f2a20d5d
     type: 'POST',
     data: JSON.stringify({
       username: username,
