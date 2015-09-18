@@ -1,8 +1,3 @@
-var app = {};
-app.init = function() {
-
-};
-
 var escapeHTML = function(str) {
   var div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
@@ -24,7 +19,7 @@ var display = function(user, message) {
 
 var fetch = function() {
   $.ajax({
-    url: 'http://127.0.0.1:3000',
+    url: 'http://127.0.0.1:3000/classes/messages',
     type: 'GET',
     // data: JSON.stringify(message),
     dataType: 'JSON',
@@ -58,7 +53,7 @@ var fetch = function() {
 
 var send = function(message) {
   $.ajax({
-    url: 'http://127.0.0.1:3000',
+    url: 'http://127.0.0.1:3000/classes/messages',
     type: 'POST',
     data: JSON.stringify({
       username: username,
